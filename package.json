@@ -1,0 +1,23 @@
+{
+  "name": "gympasstest",
+  "version": "1.0.0",
+  "description": "A gympass test",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nathancaracho/gympass_test.git"
+  },
+  "keywords": [
+    "gympass",
+    "test"
+  ],
+  "author": "nathan.caracho@hotmail.com",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/nathancaracho/gympass_test/issues"
+  },
+  "homepage": "https://github.com/nathancaracho/gympass_test#readme"
+}
