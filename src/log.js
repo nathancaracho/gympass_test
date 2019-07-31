@@ -26,12 +26,12 @@
         });
         return logObj;
     }
-    const log = (filePath, headerList) => {
+    const log = (filePath, header) => {
         let logList = [];
         const logFile = getLogFile(filePath);
         logFile.split(/\n/).forEach((row, index) => {
             if (index)
-                logList.push(parseLogToJSON(row, headerList));
+                logList.push(parseLogToJSON(row, Object.getOwnPropertyNames(header)));
         });
 
         return logList;
