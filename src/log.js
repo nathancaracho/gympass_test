@@ -13,25 +13,33 @@
         }
     }
 
-    const parseLogToJSON = (row, headerList) => {
-        let logObj = {};
+    const parseLogToJSON = (row, header) => {
+        let logObject = {};
+        const headerNameList = Object.getOwnPropertyNames(header);
         const splitedRow = row.split(/(?<=[\w+|\d+])\s+(?=[\w+|\d+])/g);
 
         if (!splitedRow.length)
             throw "The file not in correct format";
 
         splitedRow.forEach((attrValue, index) => {
-            if (headerList.length - 1 >= index)
-                logObj[headerList[index]] = attrValue;
+            if (headerNameList.length - 1 >= index) {
+                const headerName = headerNameList[index];
+                const headerTransform = header[headerName];
+
+                if (typeof headerTransform === "function")
+                    logObject = Object.assign(logObject, headerTransform(attrValue));
+                else
+                    logObject[headerName] = attrValue;
+            }
         });
-        return logObj;
+        return logObject;
     }
     const log = (filePath, header) => {
         let logList = [];
         const logFile = getLogFile(filePath);
         logFile.split(/\n/).forEach((row, index) => {
             if (index)
-                logList.push(parseLogToJSON(row, Object.getOwnPropertyNames(header)));
+                logList.push(parseLogToJSON(row, header));
         });
 
         return logList;
